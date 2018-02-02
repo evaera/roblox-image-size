@@ -56,7 +56,7 @@ app.get('/image-size/:asset', async (req, res) => {
   }
 })
 
-app.listen(8000)
+app.listen(process.env.PORT || 8000)
 
 // Reset the IP rate limits every minte
 if (process.env.MAX_REQS_PER_MIN) {
