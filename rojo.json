@@ -1,0 +1,10 @@
+{
+  "name": "roblox-image-size",
+  "servePort": 8000,
+  "partitions": {
+    "plugin": {
+      "path": "./plugin/ImageSize",
+      "target": "ServerScriptService.ImageSize.ImageSize"
+    }
+  }
+}
