@@ -40,7 +40,7 @@ app.get('/image-size/:asset', async (req, res) => {
   try {
     const chunks = []
 
-    request(`http://www.roblox.com/asset/?id=${req.params.asset}`, {
+    request(`https://assetdelivery.roblox.com/v1/asset?id=${req.params.asset}`, {
       gzip: true // Roblox images are gzipped
     }).on('data', chunk => chunks.push(chunk)).on('end', () => {
       try {
