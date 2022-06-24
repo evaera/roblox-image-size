@@ -9,6 +9,7 @@
     "dotenv": "^5.0.0",
     "express": "^4.16.2",
     "image-size": "^0.6.2",
+    "node-fetch": "2",
     "request": "^2.83.0"
   }
 }
