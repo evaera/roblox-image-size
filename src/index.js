@@ -1,6 +1,6 @@
 require('dotenv').config()
 const express = require('express')
-const request = require('request')
+const fetch = require('node-fetch')
 const imageSize = require('image-size')
 
 const app = express()
@@ -38,20 +38,17 @@ app.get('/image-size/:asset', async (req, res) => {
   // Get image
 
   try {
-    const chunks = []
+    const assetInfoRequest = await fetch(`https://assetdelivery.roblox.com/v2/assetId/${req.params.asset}`)
+    if (!assetInfoRequest.ok) return output({error: true})
 
-    request(`https://assetdelivery.roblox.com/v1/asset?id=${req.params.asset}`, {
-      gzip: true // Roblox images are gzipped
-    }).on('data', chunk => chunks.push(chunk)).on('end', () => {
-      try {
-        const buffer = Buffer.concat(chunks)
+    const { errors, locations } = await assetInfoRequest.json()
+    if (errors) return output({error: true})
 
-        output(imageSize(buffer))
-      } catch (e) {
-        output({error: true})
-      }
-    })
-  } catch (e) {
+    const assetRequest = await fetch(locations[0].location)
+    if (!assetRequest.ok) return output({error: true})
+
+    output(imageSize(await assetRequest.buffer()))
+  } catch {
     output({error: true})
   }
 })
