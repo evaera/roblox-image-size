@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "dotenv": "^5.0.0",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "image-size": "^0.6.2",
     "node-fetch": "2"
   }
